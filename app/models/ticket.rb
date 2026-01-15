@@ -1,3 +1,5 @@
+#Inherits from ApplicationRecord class ruby on rails functionality. The ticket class associates tickets to region, resource, and organization.
+#Also, defines details of ticket, and the scope of the ticket. Lastly, through methods determines if ticket is open, captured, and id of ticket.
 class Ticket < ApplicationRecord
 
   belongs_to :region

@@ -1,3 +1,6 @@
+#Inherits from ApplicationRecord class ruby on rails functionality. The user class defined role and associates organization of a user.
+#Also, validates information of the user, and through methods sets the role and email of user. 
+
 class User < ApplicationRecord
 
   enum role: [:admin, :organization]

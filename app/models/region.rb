@@ -1,3 +1,5 @@
+#Inherits from ApplicationRecord class ruby on rails functionality. The region class associates tickets to a region.
+#Also the class validates information about a region and through a method either finds or creates a region.
 class Region < ApplicationRecord
 
   has_many :tickets

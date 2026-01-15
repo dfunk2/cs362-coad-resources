@@ -1,5 +1,7 @@
+#Inherits from ApplicationRecord class ruby on rails functionality which allows it to define attributes, enums,
+#methods, validations for the organizations within COAD. Specifically it sets information about an organization in attributes. Associates users, tickets, and resources
+#to an organization. Also it determines via methods if an organizations is accepted or rejected from COAD.
 class Organization < ApplicationRecord
-
   attr_accessor :agreement_one, :agreement_two, :agreement_three, :agreement_four, :agreement_five, :agreement_six, :agreement_seven, :agreement_eight
 
   enum status: [:approved, :submitted, :rejected, :locked]

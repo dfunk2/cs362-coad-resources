@@ -1,3 +1,5 @@
+#Inherits from ApplicationRecord class ruby on rails functionality. The ResourceCategory class creates, makes active, inactive, and
+#categorizes by organization a resource. 
 class ResourceCategory < ApplicationRecord
 
   has_and_belongs_to_many :organizations

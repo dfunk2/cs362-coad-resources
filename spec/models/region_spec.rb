@@ -21,4 +21,8 @@ RSpec.describe Region, type: :model do
     it {should respond_to(:name)}
   end
 
+  describe 'associations' do
+    it {should have_many(:tickets)}
+  end
+
 end

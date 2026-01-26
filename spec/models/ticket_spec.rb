@@ -16,4 +16,10 @@ RSpec.describe Ticket, type: :model do
     it {should respond_to(:region_id)}
   end
 
+  describe 'associations' do 
+    it {should belong_to(:region)}
+    it {should belong_to(:resource_category)}
+    it {should belong_to(:organization).optional}
+  end
+
 end

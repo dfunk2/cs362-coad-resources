@@ -10,4 +10,8 @@ RSpec.describe User, type: :model do
     it {should respond_to(:role)}
   end
 
+  describe 'associations' do
+    it { should belong_to(:organization).optional}
+  end
+
 end

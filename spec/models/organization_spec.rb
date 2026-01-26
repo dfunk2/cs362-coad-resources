@@ -19,4 +19,10 @@ it "exists" do
     it {should respond_to(:title)}
     it {should respond_to(:transportation)}
   end
+
+  describe 'associations' do 
+    it {should have_many(:users)}
+    it {should have_many(:tickets)}
+    it {should have_and_belong_to_many(:resource_categories)}
+  end
 end

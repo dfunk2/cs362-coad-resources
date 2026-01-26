@@ -17,4 +17,8 @@ RSpec.describe Region, type: :model do
     result = region.to_s
   end
 
+  describe 'attributes' do
+    it {should respond_to(:name)}
+  end
+
 end

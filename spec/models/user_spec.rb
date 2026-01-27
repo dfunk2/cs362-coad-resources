@@ -18,8 +18,5 @@ RSpec.describe User, type: :model do
     it do
       should_not allow_value("user").for(:email)
     end
-
-    it do
-      
   end
 end

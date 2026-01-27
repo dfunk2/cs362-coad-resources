@@ -11,5 +11,18 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe TicketsHelper, type: :helper do
+  describe '#format_phone_number' do
+    it 'forms a US phone number' do
+      expect(helper.format_phone_number('5035551234')).to eq('+15035551234')
+    end
+
+    it 'formats a phone number with dashes' do
+      expect(helper.format_phone_number('503-555-1234')).to eq('+15035551234')
+    end
+
+    it 'formats a phone number with parentheses and spaces' do
+      expect(helper.format_phone_number('(503) 555-1234')).to eq('+15035551234')
+    end
+  end
 
 end

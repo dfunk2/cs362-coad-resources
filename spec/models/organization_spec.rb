@@ -19,14 +19,8 @@ RSpec.describe Organization, type: :model do
     it{should validate_uniqueness_of(:email).case_insensitive}
     it{should validate_uniqueness_of(:name).case_insensitive}
 
-
-    it do
-      should allow_value('test@gmail.com').for(:email)
-    end
-
-    it do
-      should_not allow_value('invalid_email').for(:email)
-    end
+    it { should allow_value('test@gmail.com').for(:email) }
+    it { should_not allow_value('invalid_email').for(:email) }
   end 
 
   describe 'attributes' do

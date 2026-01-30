@@ -12,17 +12,9 @@ RSpec.describe Ticket, type: :model do
     it {should validate_length_of(:name).is_at_least(1).is_at_most(255)}
     it {should validate_length_of(:description).is_at_most(1020)}
     
-    it do
-      should allow_value('+1 541 322 5655').for(:phone)
-        .for(:phone)
-    end
+    it { should allow_value('+1 541 322 5655').for(:phone) }
+    it { should_not allow_value('541').for(:phone) }
 
-    it do 
-      should_not allow_value('541').for(:phone)
-    end
-  end
-  it "exists" do
-    Ticket.new
   end 
 
   describe 'attributes' do

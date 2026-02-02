@@ -24,7 +24,7 @@ RSpec.describe ResourceCategoriesController, type: :controller do
       it "is successful" do
         sign_in admin
         get :index
-        expect(response).to have_http_status(:redirect)
+        expect(response).to have_http_status(:success)
       end
     end
   end

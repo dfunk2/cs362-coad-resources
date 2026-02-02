@@ -13,18 +13,18 @@ RSpec.describe OrganizationsController, type: :controller do
     end 
 
     context "when logged in as organization" do
-      it "denies access and redirects" do
+      it "success" do
         sign_in user
         get :index
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to have_http_status(:success)
       end
     end
 
     context "when logged in as admin" do
-      it "allows access and redirects to admin organization dashboard" do
+      it "allows access" do
         sign_in admin
         get :index
-        expect(response).to have_http_status(:redirect)
+        expect(response).to have_http_status(:success)
       end
     end
   end

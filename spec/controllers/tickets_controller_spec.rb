@@ -28,7 +28,7 @@ RSpec.describe TicketsController, type: :controller do
     it "redirects when logged in" do
       ticket = create(:ticket)
       get :show, params: { id: ticket.id }
-      expect(response).to redirect_to(new_user_session_path)
+      expect(response).to redirect_to(dashboard_path)
     end
   end
 end

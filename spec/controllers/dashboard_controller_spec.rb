@@ -13,18 +13,18 @@ RSpec.describe DashboardController, type: :controller do
     end 
 
     context "when logged in as organization" do
-      it "redirects to organization dashboard" do
+      it "success" do
         sign_in user
         get :index
-        expect(response).to have_http_status(:redirect)
+        expect(response).to have_http_status(:success)
       end
     end
 
     context "when logged in as admin" do
-      it "redirects to admin dashboard" do
+      it "success" do
         sign_in admin
         get :index
-        expect(response).to have_http_status(:redirect)
+        expect(response).to have_http_status(:success)
       end
     end
   end

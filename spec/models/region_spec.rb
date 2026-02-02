@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Region, type: :model do
-
+  let(:region_name) {create:region, name: "Bend"}
   # it "exists" do
   #   Region.new
   # end
@@ -37,4 +37,9 @@ RSpec.describe Region, type: :model do
     it {should have_many(:tickets)}
   end
 
+  describe "to_s" do
+    it "returns name of region" do
+      expect(region_name.to_s).to eq("Bend")
+    end
+  end
 end

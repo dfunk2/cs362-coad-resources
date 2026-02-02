@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
+  let(:org) {create:organization, name: "OSU Cascade"}
 # it "exists" do
 #     Organization.new
   describe "validations" do 
@@ -43,4 +44,33 @@ RSpec.describe Organization, type: :model do
     it {should have_many(:tickets)}
     it {should have_and_belong_to_many(:resource_categories)}
   end
+
+  describe "approve" do
+    it "returns approved" do
+      org.approve
+      expect(org.status).to eq("approved")
+    end
+  end
+
+  describe "reject" do
+    it "returns rejected" do
+      org.reject
+      expect(org.status).to eq("rejected")
+    end
+  end
+
+  describe "set default status" do
+    it "returns submitted if status is nil" do
+      org.status = nil
+      org.set_default_status 
+      expect(org.status).to eq("submitted")
+    end
+  end
+
+  describe 'to_s' do
+    it 'returns the organizations name' do
+      expect(org.to_s).to eq("OSU Cascade")
+    end
+  end
 end
+

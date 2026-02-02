@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let(:org) {create(:organization)}
+  let(:org_user) {create(:user, organization: org)}
+  let(:user_email) {create(:user, email: "jane@example.com")}
 # it "exists" do
 #     User.new
 #   end 
@@ -23,6 +26,18 @@ RSpec.describe User, type: :model do
 
   describe 'associations' do
     it { should belong_to(:organization).optional }
+  end
 
+  describe "to_s" do
+    it "returns email of user" do
+      expect(user_email.to_s).to eq("jane@example.com")
+    end
+  end
+
+  describe "set default role" do
+    it "user is an organization" do
+      org_user.set_default_role
+      expect(org_user.role).to eq("organization")
+    end
   end
 end

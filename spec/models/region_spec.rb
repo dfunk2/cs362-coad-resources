@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Region, type: :model do
-  let(:region_name) {create:region, name: "Bend"}
+  let(:region_name) {create(:region, name: "Bend")}
   # it "exists" do
   #   Region.new
   # end
@@ -40,6 +40,21 @@ RSpec.describe Region, type: :model do
   describe "to_s" do
     it "returns name of region" do
       expect(region_name.to_s).to eq("Bend")
+    end
+
+    describe 'class methods' do
+      describe '.unspecified' do
+        it 'finds or creates an Unspecified category' do
+          category = ResourceCategory.unspecified
+          expect(category.name).to eq('Unspecified')
+        end
+    
+        it 'returns the same category if called multiple times' do
+          category1 = ResourceCategory.unspecified
+          category2 = ResourceCategory.unspecified
+          expect(category1.id).to eq(category2.id)
+        end
+      end
     end
   end
 end

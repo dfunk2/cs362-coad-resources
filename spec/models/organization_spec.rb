@@ -72,5 +72,7 @@ RSpec.describe Organization, type: :model do
       expect(org.to_s).to eq("OSU Cascade")
     end
   end
+
+  
 end
 

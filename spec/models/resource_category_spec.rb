@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ResourceCategory, type: :model do
-  let(:category) {create:resource_category, name: "first aid"}
+  let(:category) {create(:resource_category, name: "first aid")}
 # it "exists" do
 #     ResourceCategory.new
 #   end 
@@ -51,4 +51,37 @@ RSpec.describe ResourceCategory, type: :model do
     end
   end
 
+  describe 'class methods' do
+    describe '.unspecified' do
+      it 'finds or creates an Unspecified category' do
+        category = ResourceCategory.unspecified
+        expect(category.name).to eq('Unspecified')
+      end
+  
+      it 'returns the same category if called multiple times' do
+        category1 = ResourceCategory.unspecified
+        category2 = ResourceCategory.unspecified
+        expect(category1.id).to eq(category2.id)
+      end
+    end
+  end
+
+  describe 'scopes' do
+    let!(:active_category) { create(:resource_category, active: true) }
+    let!(:inactive_category) { create(:resource_category, active: false) }
+  
+    describe '.active' do
+      it 'returns active categories' do
+        expect(ResourceCategory.active).to include(active_category)
+        expect(ResourceCategory.active).not_to include(inactive_category)
+      end
+    end
+  
+    describe '.inactive' do
+      it 'returns inactive categories' do
+        expect(ResourceCategory.inactive).to include(inactive_category)
+        expect(ResourceCategory.inactive).not_to include(active_category)
+      end
+    end
+  end
 end

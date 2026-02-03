@@ -64,4 +64,66 @@ RSpec.describe Ticket, type: :model do
     end 
   end 
 
+  describe 'scopes' do
+    let!(:open_ticket) { create(:ticket, closed: false, organization: nil) }
+    let!(:closed_ticket) { create(:ticket, closed: true) }
+    let!(:org) { create(:organization) }
+    let!(:captured_ticket) { create(:ticket, closed: false, organization: org) }
+    let!(:closed_org_ticket) { create(:ticket, closed: true, organization: org) }
+    let!(:region) { create(:region) }
+    let!(:region_ticket) { create(:ticket, region: region) }
+    let!(:category) { create(:resource_category) }
+    let!(:category_ticket) { create(:ticket, resource_category: category) }
+  
+    describe '.open' do
+      it 'returns tickets that are open and not captured' do
+        expect(Ticket.open).to include(open_ticket)
+        expect(Ticket.open).not_to include(closed_ticket)
+        expect(Ticket.open).not_to include(captured_ticket)
+      end
+    end
+  
+    describe '.closed' do
+      it 'returns tickets that are closed' do
+        expect(Ticket.closed).to include(closed_ticket)
+        expect(Ticket.closed).to include(closed_org_ticket)
+        expect(Ticket.closed).not_to include(open_ticket)
+      end
+    end
+  
+    describe '.all_organization' do
+      it 'returns tickets that are not closed and have an organization' do
+        expect(Ticket.all_organization).to include(captured_ticket)
+        expect(Ticket.all_organization).not_to include(open_ticket)
+        expect(Ticket.all_organization).not_to include(closed_ticket)
+      end
+    end
+  
+    describe '.organization' do
+      it 'returns open tickets for a specific organization' do
+        expect(Ticket.organization(org.id)).to include(captured_ticket)
+        expect(Ticket.organization(org.id)).not_to include(closed_org_ticket)
+        expect(Ticket.organization(org.id)).not_to include(open_ticket)
+      end
+    end
+  
+    describe '.closed_organization' do
+      it 'returns closed tickets for a specific organization' do
+        expect(Ticket.closed_organization(org.id)).to include(closed_org_ticket)
+        expect(Ticket.closed_organization(org.id)).not_to include(captured_ticket)
+      end
+    end
+  
+    describe '.region' do
+      it 'returns tickets for a specific region' do
+        expect(Ticket.region(region.id)).to include(region_ticket)
+      end
+    end
+  
+    describe '.resource_category' do
+      it 'returns tickets for a specific resource category' do
+        expect(Ticket.resource_category(category.id)).to include(category_ticket)
+      end
+    end
+  end
 end

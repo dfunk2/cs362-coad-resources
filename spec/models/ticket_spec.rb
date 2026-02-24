@@ -59,7 +59,7 @@ RSpec.describe Ticket, type: :model do
     it "ticket has organization" do
       expect(ticket_with_org.captured?).to be true
     end 
-    it "ticket withou organization" do
+    it "ticket without organization" do
       expect(ticket_without_org.captured?).to be false
     end 
   end 

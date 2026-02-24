@@ -25,11 +25,17 @@ RSpec.describe TicketsController, type: :controller do
   end
 
   describe "GET show" do
-    it "redirects when logged in" do
+    it "is successful for a user with an approved organization" do
+      ticket = create(:ticket)
+      get :show, params: { id: ticket.id }
+      expect(response).to have_http_status(:success)
+    end
+
+    it "redirects for a user without an approved organization" do
+      sign_in create(:user, organization: nil)
       ticket = create(:ticket)
       get :show, params: { id: ticket.id }
       expect(response).to redirect_to(dashboard_path)
     end
   end
 end
-
